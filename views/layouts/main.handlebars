@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messages</title>
+  <style>
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 10px;
+      height: 300px; /* Should be removed. Only for demonstration */
+    }
+    .info {
+      background-color: #e6f7ff;
+    }
+    .warning {
+      background-color: #fffbe6;
+    }
+    .error {
+      background-color: #ffe6e6;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  </style>
+</head>
+<body>
+  <h1>Messages</h1>
+  <div class="column">
+  <h2>[main]</h2>
+  <ul>
+    {{#each data.menu}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="column">
+  <h2>[screen]</h2>
+  <ul>
+    {{#each data.nodos}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</div>
+  {{!-- <div class="column">
+    <h2>Main</h2>
+    {{#each data2.menu}}
+      <div class="{{this.type}}">
+        {{this.message}}
+      </div>
+    {{/each}}
+  </div>
+  <div class="column">
+    <h2>Screen</h2>
+    {{#each messageArrays.scale}}
+      <div class="{{this.type}}">
+        {{this.messages}}
+      </div>
+    {{/each}}
+  </div> --}}
+  <div class="clearfix"></div>
+</body>
+</html>

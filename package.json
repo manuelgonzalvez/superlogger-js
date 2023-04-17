@@ -1,0 +1,25 @@
+{
+  "name": "superlogger-js",
+  "version": "0.0.1",
+  "description": "Parser Serial de lib superLogger",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuelgonzalvez/superlogger-js.git"
+  },
+  "keywords": [
+    "logging",
+    "serial",
+    "cpp",
+    "debug"
+  ],
+  "author": "manuelgonzalvez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manuelgonzalvez/superlogger-js/issues"
+  },
+  "homepage": "https://github.com/manuelgonzalvez/superlogger-js#readme"
+}

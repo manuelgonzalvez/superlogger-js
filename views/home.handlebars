@@ -1,0 +1,53 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="/client.js"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script> --}}
+
+  <title>Messages</title>
+  <style>
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 10px;
+      height: 300px; /* Should be removed. Only for demonstration */
+    }
+    .info {
+      background-color: #e6f7ff;
+    }
+    .warning {
+      background-color: #fffbe6;
+    }
+    .error {
+      background-color: #ffe6e6;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  </style>
+</head>
+<body>
+  <h1>Messages</h1>
+  <div class="column">
+    <h2>Main</h2>
+    {{#each messageArrays.menu}}
+      <div class="{{this.type}}">
+        {{this.message}}
+      </div>
+    {{/each}}
+  </div>
+  <div class="column">
+    <h2>Screen</h2>
+    {{#each messageArrays.scale}}
+      <div class="{{this.type}}">
+        {{this.messages}}
+      </div>
+    {{/each}}
+  </div>
+  <div class="clearfix"></div>
+</body>
+</html>
