@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/manuelgonzalvez/superlogger-js/issues"
   },
-  "homepage": "https://github.com/manuelgonzalvez/superlogger-js#readme"
+  "homepage": "https://github.com/manuelgonzalvez/superlogger-js#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.5",
+    "handlebars": "^4.7.7",
+    "nodemon": "^2.0.22",
+    "serialport": "^9.0.7",
+    "sse": "^0.0.8"
+  }
 }

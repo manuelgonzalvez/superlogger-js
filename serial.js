@@ -1,8 +1,9 @@
 
-var SerialPort = require("serialport");
+// var SerialPort = require("serialport");
+const SerialPort = require('serialport')
 //const { write } = require("bitwise/byte");
 
-var serialPort = new SerialPort("COM25", { baudRate: 19200, autoOpen: false });
+var serialPort = new SerialPort("COM3", { baudRate: 115200, autoOpen: false });
 var stdin = process.openStdin();
 
 
