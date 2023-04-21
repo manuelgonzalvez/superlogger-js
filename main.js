@@ -2,7 +2,19 @@
 
 
 var SerialPort = require("serialport");
-var port = new SerialPort("COM3", { baudRate: 460800, autoOpen: true });
+
+// Get the serial port number and baud rate from the command-line arguments, or use default values
+const portNumber = process.argv[2] || 'COM3';
+const baudRate = parseInt(process.argv[3], 10) || 115200;
+
+// Create a new SerialPort instance with the specified port number and baud rate
+const port = new SerialPort(portNumber, {
+  baudRate: baudRate,
+  autoOpen: true
+});
+
+
+// var port = new SerialPort("COM3", { baudRate: 460800, autoOpen: true });
 const Readline = require('@serialport/parser-readline');
 const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
 
@@ -23,6 +35,10 @@ const latestMessages = []
 const messageArrays = {
 
 };
+
+// myapp.js
+const args = process.argv.slice(2);
+console.log(`Command-line arguments: ${args}`);
 
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -83,6 +99,7 @@ app.listen(3000, () => {
 // parse and categorize incoming messages
 parser.on('data', (line) => {
   console.log(line)
+  
 
       // Ignore empty lines
       if (line === "") {
