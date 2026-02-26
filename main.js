@@ -5,7 +5,7 @@ var SerialPort = require("serialport");
 
 // Get the serial port number and baud rate from the command-line arguments, or use default values
 const portNumber = process.argv[2] || 'COM3';
-const baudRate = parseInt(process.argv[3], 10) || 115200;
+const baudRate = parseInt(process.argv[3], 10) || 460800;
 
 // Create a new SerialPort instance with the specified port number and baud rate
 const port = new SerialPort(portNumber, {

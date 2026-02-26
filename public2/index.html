@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Serial Messages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem;
+      background-color: #fff;
+      box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .message-item {
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .message-item span {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .message-item.collapsed {
+      cursor: pointer;
+    }
+
+    .message-item.collapsed .message-text {
+      display: none;
+    }
+
+    .message-item.collapsed .collapse-button:before {
+      content: '+ ';
+    }
+
+    .collapse-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+    }
+
+    .message-text {
+      white-space: pre-wrap;
+      margin-left: 2rem;
+    }
+
+    .tag-header {
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .level-header {
+      font-style: italic;
+      margin-left: 1rem;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+      <h1>Serial Messages</h1>
+      <div id="message-list"></div>
+    </div>
+
+</body>
+
+<script>
+    const messagesContainer = document.getElementById('messages-container');
+  
+    const renderMessages = (messages) => {
+      messagesContainer.innerHTML = '';
+      messages.forEach((tagObj) => {
+        const tagDiv = document.createElement('div');
+        tagDiv.classList.add('tag-div');
+        const tagHeader = document.createElement('h2');
+        tagHeader.classList.add('tag-header');
+        tagHeader.innerText = `${tagObj.tag}`;
+        tagDiv.appendChild(tagHeader);
+        tagObj.levels.forEach((levelObj) => {
+          const levelDiv = document.createElement('div');
+          levelDiv.classList.add('level-div');
+          const levelHeader = document.createElement('h3');
+          levelHeader.classList.add('level-header');
+          levelHeader.innerText = `${levelObj.level}`;
+          levelDiv.appendChild(levelHeader);
+          const messagesList = document.createElement('ul');
+          messagesList.classList.add('messages-list');
+          levelObj.messages.forEach((message) => {
+            const messageItem = document.createElement('li');
+            messageItem.classList.add('message-item');
+            const messageHeader = document.createElement('div');
+            messageHeader.classList.add('message-header');
+            const messagePath = document.createElement('span');
+            messagePath.classList.add('message-path');
+            messagePath.innerText = `${message.path}`;
+            const messageFunction = document.createElement('span');
+            messageFunction.classList.add('message-function');
+            messageFunction.innerText = `${message.function}`;
+            messageHeader.appendChild(messagePath);
+            messageHeader.appendChild(document.createTextNode(': '));
+            messageHeader.appendChild(messageFunction);
+            messageItem.appendChild(messageHeader);
+            const messageText = document.createElement('div');
+            messageText.classList.add('message-text');
+            messageText.innerText = `${message.text}`;
+            messageItem.appendChild(messageText);
+            messagesList.appendChild(messageItem);
+          });
+          levelDiv.appendChild(messagesList);
+          tagDiv.appendChild(levelDiv);
+        });
+        messagesContainer.appendChild(tagDiv);
+      });
+    };
+  
+    const source = new EventSource('/messagesUpdated');
+    source.addEventListener('message', (event) => {
+      const messages = JSON.parse(event.data);
+      renderMessages(messages);
+    });
+  </script>
+  
+
+</html>

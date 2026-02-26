@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Serial Messages</title>
+</head>
+<body>
+  <h1>Serial Messages</h1>
+  <div id="messages"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const messagesDiv = document.querySelector('#messages');
+
+    // Connect to socket.io server
+    const socket = io.connect();
+
+    // Listen for messagesUpdated event
+    socket.on('messagesUpdated', (messagesByTagAndLevel) => {
+
+      console.warn(messagesByTagAndLevel)
+      // Clear messagesDiv
+      messagesDiv.innerHTML = '';
+
+      // Iterate over messagesByTagAndLevel and display messages
+      for (const [tag, levels] of Object.entries(messagesByTagAndLevel)) {
+        const tagHeader = document.createElement('h2');
+        tagHeader.textContent = tag;
+        messagesDiv.appendChild(tagHeader);
+        for (const [level, messages] of Object.entries(levels)) {
+          const levelHeader = document.createElement('h3');
+          levelHeader.textContent = level;
+          messagesDiv.appendChild(levelHeader);
+          const messageList = document.createElement('ul');
+          for (const message of messages) {
+            const messageItem = document.createElement('li');
+            messageItem.textContent = message.messageText;
+            messageList.appendChild(messageItem);
+          }
+          messagesDiv.appendChild(messageList);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

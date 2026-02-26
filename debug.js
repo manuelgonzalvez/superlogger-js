@@ -4,9 +4,19 @@ const port = 3000;
 
 // Set up serial port communication
 const SerialPort = require('serialport');
-const portName = 'COM9'; // Replace with your serial port name
-const baudRate = 115200; // Replace with your baud rate
-// const baudRate = 460800; // Replace with your baud rate
+const portName = 'COM3'; // Replace with your serial port name
+// const baudRate = 115200; // Replace with your baud rate
+const baudRate = 460800; // Replace with your baud rate
+
+// const serialPort = require('serialport');
+// const serialPort = new SerialPort();
+
+// serialPort.list().then(function(ports){
+//   ports.forEach(function(port){
+//     console.log("Port: ", port);
+//   })
+// });
+
 const serialPort = new SerialPort(portName, { baudRate });
 
 // var port = new SerialPort("COM3", { baudRate: 460800, autoOpen: true });
